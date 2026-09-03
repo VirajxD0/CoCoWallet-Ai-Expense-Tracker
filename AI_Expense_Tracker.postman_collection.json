@@ -1,0 +1,547 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name": "AI Expense Tracker API",
+  "description": "Production-grade REST API for AI-powered expense tracking. All endpoints require JWT Bearer token except auth routes.",
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001/api/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3001/health",
+            "description": "Check if the API server is running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "description": "Authentication endpoints — signup, login, refresh, logout, me",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/signup",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123\",\n  \"name\": \"Test User\"\n}"
+            },
+            "description": "Register a new user account. Returns user + JWT tokens."
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/login",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123\"\n}"
+            },
+            "description": "Login with email and password. Returns user + JWT tokens. Copy the accessToken to the environment variable."
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/refresh",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "description": "Refresh access token using a valid refresh token. Returns new accessToken."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get current authenticated user info."
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Logout and revoke all refresh tokens."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Expenses",
+      "description": "Expense CRUD + search + import + stats. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "List Expenses",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expenses?page=1&limit=20&sortBy=date&sortOrder=desc",
+              "host": ["{{baseUrl}}"],
+              "path": ["expenses"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "sortBy", "value": "date" },
+                { "key": "sortOrder", "value": "desc" }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get paginated list of expenses. Supports search, category filter, date range."
+          },
+          "response": []
+        },
+        {
+          "name": "List Expenses (with filters)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expenses?page=1&limit=10&search=coffee&category=Food%20%26%20Dining&startDate=2026-01-01&endDate=2026-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["expenses"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "search", "value": "coffee" },
+                { "key": "category", "value": "Food & Dining" },
+                { "key": "startDate", "value": "2026-01-01" },
+                { "key": "endDate", "value": "2026-12-31" }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get expenses with search, category filter, and date range."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Expense",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/expenses",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 42.50,\n  \"description\": \"Lunch at cafe\",\n  \"category\": \"Food & Dining\",\n  \"date\": \"2026-08-21\"\n}"
+            },
+            "description": "Create a new expense. Category is optional (AI can auto-assign)."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Expense (no category — for AI categorize)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/expenses",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 15.99,\n  \"description\": \"Uber ride to airport\",\n  \"date\": \"2026-08-21\"\n}"
+            },
+            "description": "Create expense without category — then use AI to categorize it."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Expense by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/expenses/{{expenseId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get a single expense by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Expense",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/expenses/{{expenseId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 45.00,\n  \"description\": \"Lunch at cafe (updated)\"\n}"
+            },
+            "description": "Update an existing expense. Only send fields you want to change."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Expense",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/expenses/{{expenseId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Delete an expense by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Expense Stats",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/expenses/stats?startDate=2026-01-01&endDate=2026-12-31",
+              "host": ["{{baseUrl}}"],
+              "path": ["expenses", "stats"],
+              "query": [
+                { "key": "startDate", "value": "2026-01-01" },
+                { "key": "endDate", "value": "2026-12-31" }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get spending statistics: total, average, top categories."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/expenses/categories",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get all distinct categories used by the current user."
+          },
+          "response": []
+        },
+        {
+          "name": "Bulk Import (CSV)",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/expenses/import",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expenses\": [\n    {\n      \"amount\": 25.00,\n      \"description\": \"Grocery shopping\",\n      \"category\": \"Groceries\",\n      \"date\": \"2026-08-01\"\n    },\n    {\n      \"amount\": 12.50,\n      \"description\": \"Coffee beans\",\n      \"date\": \"2026-08-02\"\n    },\n    {\n      \"amount\": 89.99,\n      \"description\": \"Monthly gym membership\",\n      \"category\": \"Health & Medical\",\n      \"date\": \"2026-08-03\"\n    }\n  ]\n}"
+            },
+            "description": "Bulk import multiple expenses at once (max 1000)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Budgets",
+      "description": "Budget management with spending comparison. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "List Budgets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/budgets?month=2026-08",
+              "host": ["{{baseUrl}}"],
+              "path": ["budgets"],
+              "query": [
+                { "key": "month", "value": "2026-08" }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get all budgets for a specific month."
+          },
+          "response": []
+        },
+        {
+          "name": "Create/Upsert Budget",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/budgets",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"Food & Dining\",\n  \"monthly_limit\": 500,\n  \"month\": \"2026-08\"\n}"
+            },
+            "description": "Create or update a budget for a category/month. Upserts automatically."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Budget by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/budgets/{{budgetId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get a single budget by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Budget Limit",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/budgets/{{budgetId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"monthly_limit\": 600\n}"
+            },
+            "description": "Update a budget's monthly limit."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Budget",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/budgets/{{budgetId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Delete a budget."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Budgets with Spending",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/budgets/spending/2026-08",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get all budgets for a month with actual spending data, remaining amounts, and status (under/warning/over)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "description": "AI-powered features using Google Gemini. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "Categorize Expense",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ai/categorize",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Uber ride to airport\",\n  \"amount\": 15.99\n}"
+            },
+            "description": "Use AI to categorize an expense description. Returns category, confidence, and reasoning."
+          },
+          "response": []
+        },
+        {
+          "name": "Suggest Budgets",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ai/suggest-budgets",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"months\": 3\n}"
+            },
+            "description": "AI analyzes past spending and suggests reasonable monthly budgets per category."
+          },
+          "response": []
+        },
+        {
+          "name": "Natural Language Query",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ai/query",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"How much did I spend on food last month?\"\n}"
+            },
+            "description": "Ask a natural language question about your expenses. AI answers based on your data."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "API Docs",
+      "item": [
+        {
+          "name": "Open Swagger UI",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3001/api/docs",
+            "description": "Open the auto-generated Swagger API documentation in browser."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
