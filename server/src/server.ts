@@ -15,7 +15,7 @@ initDatabase();
 const server = app.listen(env.PORT, () => {
   logger.info(`
 ┌─────────────────────────────────────────────┐
-│  🚀 AI Expense Tracker API                  │
+│  🚀 CocoWallet API                          │
 │  ─────────────────────────────────────────  │
 │  Port:      ${env.PORT}                          │
 │  Env:       ${env.NODE_ENV}                      │

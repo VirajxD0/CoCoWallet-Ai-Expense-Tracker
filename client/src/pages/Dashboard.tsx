@@ -3,9 +3,12 @@ import { expensesApi, budgetsApi } from '@/lib/api'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency, formatDate } from '@/lib/utils'
-import { TrendingUp, Wallet, Receipt, PiggyBank, ArrowUpRight, Sparkles } from 'lucide-react'
+import { TrendingUp, Wallet, Receipt, PiggyBank, ArrowUpRight, Sparkles, LogOut, Home } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { useAuthStore } from '@/stores/authStore'
+import { authApi } from '@/lib/api'
 
 const COLORS = ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#84cc16']
 
@@ -14,6 +17,9 @@ export default function Dashboard() {
   const currentMonth = new Date().toISOString().slice(0,7)
   const { data: budgets } = useQuery({ queryKey:['budgets', currentMonth], queryFn: async()=> (await budgetsApi.spending(currentMonth)).data.data })
   const { data: recent } = useQuery({ queryKey:['recent'], queryFn: async()=> (await expensesApi.list({ limit:5, sortBy:'date', sortOrder:'desc' })).data.data })
+  const logout = useAuthStore(s=>s.logout)
+  const navigate = useNavigate()
+  const handleLogout = async () => { try{ await authApi.logout() } catch{}; logout(); navigate('/', { replace: true }) }
 
   const s = stats as any
   const b = (budgets as any) || []
@@ -21,9 +27,15 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground">Overview of your finances • {currentMonth}</p>
+      <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground">Overview of your finances • {currentMonth}</p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link to="/"><Button variant="outline" className="rounded-full gap-2 bg-white shadow-sm"><Home className="h-4 w-4"/> Back to Website</Button></Link>
+          <Button variant="outline" className="rounded-full gap-2" onClick={handleLogout}><LogOut className="h-4 w-4"/> Logout</Button>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

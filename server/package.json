@@ -1,7 +1,7 @@
 {
-  "name": "ai-expense-tracker-api",
+  "name": "cocowallet-api",
   "version": "1.0.0",
-  "description": "Production-grade AI Expense Tracker API",
+  "description": "Production-grade CocoWallet API — AI-powered expense tracking",
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/server.ts",
@@ -15,6 +15,7 @@
     "test:coverage": "jest --coverage --runInBand"
   },
   "keywords": [
+    "cocowallet",
     "expense-tracker",
     "ai",
     "express",

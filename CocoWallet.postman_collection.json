@@ -1,7 +1,7 @@
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  "name": "AI Expense Tracker API",
-  "description": "Production-grade REST API for AI-powered expense tracking. All endpoints require JWT Bearer token except auth routes.",
+  "name": "CocoWallet API",
+  "description": "Production-grade REST API for CocoWallet — AI-powered expense tracking. All endpoints require JWT Bearer token except auth routes.",
   "variable": [
     {
       "key": "baseUrl",

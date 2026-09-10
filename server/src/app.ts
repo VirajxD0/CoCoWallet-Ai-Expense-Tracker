@@ -55,7 +55,7 @@ app.use(requestId);
 // ─── API Documentation ──────────────────────────────────────────────────
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: 'AI Expense Tracker API Docs',
+  customSiteTitle: 'CocoWallet API Docs',
 }));
 
 // ─── Health Check ───────────────────────────────────────────────────────

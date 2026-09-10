@@ -9,9 +9,9 @@ const options: swaggerJsdoc.Options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'AI Expense Tracker API',
+      title: 'CocoWallet API',
       version: '1.0.0',
-      description: 'Production-grade REST API for AI-powered expense tracking',
+      description: 'Production-grade REST API for CocoWallet — AI-powered expense tracking',
       contact: {
         name: 'API Support',
       },

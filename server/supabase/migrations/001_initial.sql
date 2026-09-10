@@ -1,5 +1,5 @@
 -- ============================================================
--- AI Expense Tracker — MySQL Schema
+-- CocoWallet — MySQL Schema
 -- Run this in MySQL Workbench connected to Aiven
 -- ============================================================
 

@@ -1,4 +1,4 @@
-# AI Expense Tracker 💸🤖
+# CocoWallet 🥥💸
 
 > Production-grade, AI-powered personal finance tracker — Track expenses, manage budgets, and ask natural language questions about your money.
 
@@ -81,8 +81,8 @@ API prefix: `/api/v1` — Swagger at `/api/docs`, health at `/health`.
 
 ### 1. Clone
 ```bash
-git clone https://github.com/VirajxD0/Ai-Expense-Tracker.git
-cd Ai-Expense-Tracker
+git clone https://github.com/VirajxD0/CocoWallet.git
+cd CocoWallet
 ```
 
 ### 2. Backend
@@ -179,7 +179,7 @@ curl http://localhost:3001/health
 
 Full spec + try-it at **`/api/docs`** (swagger-jsdoc).
 
-**Postman** — import `AI_Expense_Tracker.postman_collection.json` + `postman_environment.json`.
+**Postman** — import `CocoWallet.postman_collection.json` + `CocoWallet.postman_environment.json`.
 
 ---
 
@@ -210,8 +210,8 @@ npm run build  # tsc + vite → dist/ (840kB → 245kB gzip)
 
 **Docker** (`server/Dockerfile`)
 ```bash
-docker build -t expense-api ./server
-docker run -p 3001:3001 --env-file server/.env expense-api
+docker build -t cocowallet-api ./server
+docker run -p 3001:3001 --env-file server/.env cocowallet-api
 ```
 Frontend: `client/dist` → Vercel/Netlify/Nginx. Set `VITE_API_URL` at build.
 
@@ -258,4 +258,4 @@ ISC — see `server/package.json`
 
 ---
 
-<p align="center">Built with ❤️ — AI meets personal finance.</p>
+<p align="center">Built with ❤️ — CocoWallet meets personal finance.</p>
