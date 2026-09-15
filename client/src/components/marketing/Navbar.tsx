@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X, ArrowRight, LayoutDashboard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -7,7 +7,15 @@ import { useAuthStore } from '@/stores/authStore'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const isAuthenticated = useAuthStore(s => s.isAuthenticated)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const links = [
     { label: 'Features', href: '#features' },
@@ -17,7 +25,7 @@ export function Navbar() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/70 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
+    <header className={`sticky top-0 z-50 w-full border-b backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 transition-all duration-300 ${scrolled ? 'bg-white/85 shadow-premium border-transparent' : 'bg-white/70'}`}>
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 flex h-[72px] items-center justify-between gap-4">
         <Link to="/" className="shrink-0">
           <Logo size={42} />
