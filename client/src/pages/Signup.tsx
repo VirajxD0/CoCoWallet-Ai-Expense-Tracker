@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { authApi } from '@/lib/api'
-import { useAuthStore } from '@/stores/authStore'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,17 +20,14 @@ type Form = z.infer<typeof schema>
 
 export default function Signup() {
   const navigate = useNavigate()
-  const setAuth = useAuthStore(s=>s.setAuth)
   const [error, setError] = useState('')
   const [showPw, setShowPw] = useState(false)
   const { register, handleSubmit, formState:{ errors, isSubmitting } } = useForm<Form>({ resolver: zodResolver(schema) })
   const onSubmit = async (data: Form) => {
     setError('')
     try {
-      const res = await authApi.signup(data)
-      const { user, tokens } = res.data.data
-      setAuth(user, tokens.accessToken, tokens.refreshToken)
-      navigate('/dashboard')
+      await authApi.signup(data)
+      navigate('/login', { state: { justRegistered: true } })
     } catch (e:any) { setError(e.response?.data?.message || e.response?.data?.errors?.[0]?.message || 'Signup failed') }
   }
   return (

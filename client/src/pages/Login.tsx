@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -17,6 +17,8 @@ type Form = z.infer<typeof schema>
 
 export default function Login() {
   const navigate = useNavigate()
+  const location = useLocation() as any
+  const justRegistered = !!location.state?.justRegistered
   const setAuth = useAuthStore(s=>s.setAuth)
   const [error, setError] = useState('')
   const [showPw, setShowPw] = useState(false)
@@ -136,6 +138,7 @@ export default function Login() {
 
             <div className="px-7 sm:px-8 py-6">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                {justRegistered && !error && <div className="flex items-start gap-2 p-3 rounded-xl bg-emerald-50 text-emerald-700 text-sm border border-emerald-200"><span className="mt-0.5">✓</span><span>Account created successfully — please sign in.</span></div>}
                 {error && <div className="flex items-start gap-2 p-3 rounded-xl bg-destructive/10 text-destructive text-sm border border-destructive/20"><span className="mt-0.5">⚠️</span><span>{error}</span></div>}
 
                 <div className="space-y-2">

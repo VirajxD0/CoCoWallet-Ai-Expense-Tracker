@@ -47,7 +47,7 @@ export default function Dashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card><CardHeader><CardTitle>Top Categories</CardTitle><CardDescription>Spending by category</CardDescription></CardHeader><CardContent className="h-[280px]">
-          {s?.topCategories?.length ? <ResponsiveContainer width="100%" height="100%"><BarChart data={s.topCategories.slice(0,6)}><XAxis dataKey="category" tick={{fontSize:11}} interval={0} angle={-15} textAnchor="end" height={60}/><YAxis tickFormatter={(v)=>`$${v}`}/><Tooltip formatter={(v:any)=>formatCurrency(Number(v))}/><Bar dataKey="total" radius={[6,6,0,0]} fill="#3b82f6"/></BarChart></ResponsiveContainer> : <p className="text-sm text-muted-foreground text-center py-16">No data yet. Add expenses to see insights.</p>}
+          {s?.topCategories?.length ? <ResponsiveContainer width="100%" height="100%"><BarChart data={s.topCategories.slice(0,6)}><XAxis dataKey="category" tick={{fontSize:11}} interval={0} angle={-15} textAnchor="end" height={60}/><YAxis tickFormatter={(v)=>`₹${v}`}/><Tooltip formatter={(v:any)=>formatCurrency(Number(v))}/><Bar dataKey="total" radius={[6,6,0,0]} fill="#3b82f6"/></BarChart></ResponsiveContainer> : <p className="text-sm text-muted-foreground text-center py-16">No data yet. Add expenses to see insights.</p>}
         </CardContent></Card>
 
         <Card><CardHeader><CardTitle>Budget vs Actual</CardTitle><CardDescription>{currentMonth} • {b.length ? `${b.length} budgets` : 'No budgets set'}</CardDescription></CardHeader><CardContent className="space-y-3">

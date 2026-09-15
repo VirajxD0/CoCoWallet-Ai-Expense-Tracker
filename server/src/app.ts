@@ -58,6 +58,16 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customSiteTitle: 'CocoWallet API Docs',
 }));
 
+// ─── Root ────────────────────────────────────────────────────────────────
+app.get('/', (_req, res) => {
+  res.json({
+    name: 'CocoWallet API',
+    version: '1.0.0',
+    docs: '/api/docs',
+    health: '/health',
+  });
+});
+
 // ─── Health Check ───────────────────────────────────────────────────────
 app.get('/health', (_req, res) => {
   res.json({

@@ -81,7 +81,7 @@ Categorize this expense into ONE of these categories:
 - Other
 
 Expense: "${input.description}"
-${input.amount ? `Amount: $${input.amount}` : ''}
+${input.amount ? `Amount: ₹${input.amount}` : ''}
 
 Respond ONLY with valid JSON in this exact format:
 {
@@ -139,7 +139,7 @@ Respond ONLY with valid JSON in this exact format:
     const spendingSummary = Array.from(categoryData.entries())
       .map(([cat, data]) => {
         const avgMonthly = data.total / data.months.size;
-        return `${cat}: $${avgMonthly.toFixed(2)}/month average (over ${data.months.size} months)`;
+        return `${cat}: ₹${avgMonthly.toFixed(2)}/month average (over ${data.months.size} months)`;
       })
       .join('\n');
 
@@ -150,7 +150,7 @@ ${spendingSummary}
 
 Rules:
 - Suggest limits that are realistic (slightly above average to allow growth)
-- Round to nearest $10 or $50
+- Round to nearest ₹100 or ₹500
 - Be conservative but not overly restrictive
 
 Respond ONLY with a JSON array:
@@ -215,7 +215,7 @@ Respond ONLY with a JSON array:
     const expensesContext = expenses
       .map((e) => {
         const d = typeof e.date === 'string' ? e.date : new Date(e.date as any).toISOString().split('T')[0];
-        return `${d}: $${e.amount} - ${e.description} (${e.category || 'Uncategorized'})`;
+        return `${d}: ₹${e.amount} - ${e.description} (${e.category || 'Uncategorized'})`;
       })
       .join('\n');
 
@@ -230,7 +230,7 @@ Rules:
 - Answer concisely and helpfully
 - Include specific numbers when relevant
 - If the question can't be answered from the data, say so
-- Format numbers as currency ($X.XX)`;
+- Format numbers as currency (₹X) using Indian Rupee symbol and en-IN formatting`;
 
     const answer = await this.callGemini(prompt);
 

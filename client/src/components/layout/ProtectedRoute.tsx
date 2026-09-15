@@ -6,7 +6,6 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 export function GuestRoute({ children }: { children: React.ReactNode }) {
-  const isAuthenticated = useAuthStore(s=>s.isAuthenticated)
-  if(isAuthenticated) return <Navigate to="/dashboard" replace />
+  // No longer redirects authenticated users — allows logged-in users to visit /login and /signup from Home without being forced to /dashboard
   return <>{children}</>
 }

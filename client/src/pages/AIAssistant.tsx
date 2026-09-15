@@ -45,7 +45,7 @@ export default function AIAssistant() {
       </div>
 
       {tab==='categorize' && <Card><CardHeader><CardTitle>Smart Categorization</CardTitle><CardDescription>AI predicts category from description with confidence score</CardDescription></CardHeader><CardContent className="space-y-4">
-        <div className="space-y-2"><Label>Description *</Label><Textarea placeholder="Uber ride to airport, $34" value={catForm.description} onChange={e=>setCatForm({...catForm, description:e.target.value})}/></div>
+        <div className="space-y-2"><Label>Description *</Label><Textarea placeholder="Uber ride to airport, ₹850" value={catForm.description} onChange={e=>setCatForm({...catForm, description:e.target.value})}/></div>
         <div className="space-y-2"><Label>Amount (optional)</Label><Input type="number" placeholder="34.00" value={catForm.amount} onChange={e=>setCatForm({...catForm, amount:e.target.value})}/></div>
         <Button onClick={handleCategorize} disabled={!catForm.description || catLoading} className="w-full">{catLoading ? 'Thinking...' : 'Categorize with AI'}</Button>
         {catRes && !catRes.error && <div className="p-4 bg-primary/5 border rounded-lg space-y-2"><div className="flex items-center gap-2"><Badge>{catRes.category}</Badge><span className="text-sm text-muted-foreground">{(catRes.confidence*100).toFixed(0)}% confidence</span></div><p className="text-sm">{catRes.reasoning}</p></div>}

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { useAuthStore } from '@/stores/authStore'
-import { ProtectedRoute, GuestRoute } from '@/components/layout/ProtectedRoute'
+import { ProtectedRoute } from '@/components/layout/ProtectedRoute'
 import { AppShell } from '@/components/layout/AppShell'
 import Home from '@/pages/Home'
 import Login from '@/pages/Login'
@@ -21,8 +21,8 @@ function AppRoutes(){
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<GuestRoute><Login/></GuestRoute>} />
-        <Route path="/signup" element={<GuestRoute><Signup/></GuestRoute>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
         <Route path="/dashboard" element={<ProtectedRoute><AppShell><Dashboard/></AppShell></ProtectedRoute>} />
         <Route path="/expenses" element={<ProtectedRoute><AppShell><Expenses/></AppShell></ProtectedRoute>} />
         <Route path="/budgets" element={<ProtectedRoute><AppShell><Budgets/></AppShell></ProtectedRoute>} />
