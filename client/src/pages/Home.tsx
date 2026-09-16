@@ -20,7 +20,6 @@ import {
   Bot,
   LineChart,
   ArrowUpRight,
-  Star,
   Play,
   Layers,
   Lock,
@@ -91,15 +90,7 @@ export default function Home() {
                 <span className="flex items-center gap-1.5"><Check className="h-4 w-4 rounded-full bg-emerald-500 text-white p-0.5" /> Bank-grade security</span>
               </div>
 
-              <div className="flex items-center gap-4 pt-2 border-t max-w-md">
-                <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i=> <img key={i} src={`https://i.pravatar.cc/100?img=${i+10}`} alt="" className="h-8 w-8 rounded-full border-2 border-white object-cover" />)}
-                </div>
-                <div className="text-sm">
-                  <div className="flex items-center gap-1 font-semibold"><Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" /> 4.9/5 <span className="font-normal text-muted-foreground">from 2,000+ reviews</span></div>
-                  <p className="text-xs text-muted-foreground">Trusted by 10,000+ smart savers</p>
-                </div>
-              </div>
+
             </div>
 
             {/* right — panda hero card */}
@@ -187,24 +178,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS BAR */}
-      <section className="border-y bg-white">
-        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-6 sm:py-7">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 divide-x-0 lg:divide-x">
-            {[
-              { k: '10,000+', v: 'active savers' },
-              { k: '₹2.4Cr+', v: 'expenses tracked' },
-              { k: '98.2%', v: 'AI accuracy' },
-              { k: '< 800ms', v: 'avg. AI response' },
-            ].map(s => (
-              <div key={s.k} className="text-center lg:text-left lg:px-8 first:pl-0">
-                <p className="font-display font-extrabold text-2xl tracking-tight">{s.k}</p>
-                <p className="text-xs font-semibold tracking-[0.1em] uppercase text-muted-foreground mt-1">{s.v}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* FEATURES */}
       <section id="features" className="py-16 lg:py-24 bg-muted/20">
@@ -527,20 +501,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS */}
-      <section className="py-16">
-        <div className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[28px] bg-secondary/40 border p-8 lg:p-10">
-            <div className="grid grid-cols-3 gap-4">
-              {[
-                { v: '4.9/5', l: 'avg rating' },
-                { v: '2k+', l: 'reviews' },
-                { v: '10k+', l: 'users' },
-              ].map(s=> <div key={s.v} className="rounded-2xl bg-white border p-6 text-center"><p className="font-display font-extrabold text-2xl">{s.v}</p><p className="text-[11px] font-bold tracking-widest uppercase text-muted-foreground">{s.l}</p></div>)}
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* FINAL CTA */}
       <section className="py-16">
@@ -552,7 +513,7 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-xs font-bold tracking-widest text-white backdrop-blur">READY IN 30 SECONDS</div>
                 <h2 className="font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-white leading-tight">Start building better<br />money habits today.</h2>
-                <p className="text-white/70 max-w-xl">Join 10,000+ people who finally love looking at their expenses. Free forever. No credit card.</p>
+                <p className="text-white/70 max-w-xl">Join people who finally love looking at their expenses. Free forever. No credit card.</p>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <Link to="/signup"><Button size="lg" className="rounded-full h-12 px-8 bg-white text-primary hover:bg-white/90 font-bold gap-2 shadow-xl">Create free account <ArrowRight className="h-4 w-4" /></Button></Link>
                   <Link to="/login"><Button size="lg" variant="outline" className="rounded-full h-12 px-8 bg-transparent border-white/30 text-white hover:bg-white/10">Sign in</Button></Link>

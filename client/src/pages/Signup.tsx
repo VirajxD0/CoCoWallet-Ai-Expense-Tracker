@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Logo } from '@/components/brand/Logo'
 import { Navbar } from '@/components/marketing/Navbar'
 import logo from '@/assets/icons/CoCoWalletLogo-512.png'
-import { Eye, EyeOff, Mail, Lock, User, ArrowRight, ShieldCheck, Check, Gift, Home, Star } from 'lucide-react'
+import { Eye, EyeOff, Mail, Lock, User, ArrowRight, ShieldCheck, Check, Gift, Home } from 'lucide-react'
 
 const schema = z.object({
   name: z.string().min(1, 'Name required').max(100),
@@ -57,7 +57,6 @@ export default function Signup() {
 
             <div className="relative mt-6 mb-6">
               <img src={logo} alt="CoCo panda" className="h-[132px] w-[132px] rounded-full object-cover border-[5px] border-white/20 shadow-2xl animate-float" />
-              <span className="absolute -bottom-1 left-[88px] bg-gold text-gold-foreground rounded-full px-3 py-1 text-xs font-extrabold shadow-lg border border-white/50">🎉 Join 10k+</span>
             </div>
 
             <h1 className="font-display font-extrabold text-[36px] xl:text-[42px] leading-[0.95] tracking-tight">
@@ -93,7 +92,6 @@ export default function Signup() {
             <div className="flex -space-x-1.5">
               {[1,2,3,4].map(i=> <img key={i} src={`https://i.pravatar.cc/100?img=${i+12}`} alt="" className="h-6 w-6 rounded-full border-2 border-[#0f2a44] object-cover" />)}
             </div>
-            <span>Trusted by <span className="font-bold text-white">10,000+</span> savers • <span className="inline-flex items-center gap-1 text-amber-300"><Star className="h-3 w-3 fill-amber-400"/>4.9/5</span></span>
           </div>
         </div>
       </div>
