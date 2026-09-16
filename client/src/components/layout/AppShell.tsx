@@ -1,15 +1,19 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Receipt, Wallet, Sparkles, LogOut, Menu, X, Globe, Home } from 'lucide-react'
+import { LayoutDashboard, Receipt, Wallet, Sparkles, LogOut, Menu, X, Globe, Home, Repeat, Target, Bell } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
 import { authApi } from '@/lib/api'
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/brand/Logo'
+import { AlertBell } from '@/pages/alerts/Alerts'
 import { useState } from 'react'
 
 const nav = [
   { to:'/dashboard', label:'Dashboard', icon: LayoutDashboard },
   { to:'/expenses', label:'Expenses', icon: Receipt },
   { to:'/budgets', label:'Budgets', icon: Wallet },
+  { to:'/recurring', label:'Recurring', icon: Repeat },
+  { to:'/goals', label:'Goals', icon: Target },
+  { to:'/alerts', label:'Alerts', icon: Bell },
   { to:'/ai', label:'AI Assistant', icon: Sparkles },
 ]
 

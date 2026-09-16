@@ -25,6 +25,20 @@ router.get('/', validate(budgetQuerySchema, 'query'), budgetsController.getAll);
 
 /**
  * @swagger
+ * /budgets/categories:
+ *   get:
+ *     tags: [Budgets]
+ *     summary: Get all distinct budget categories for the user
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of budget categories
+ */
+router.get('/categories', budgetsController.categories);
+
+/**
+ * @swagger
  * /budgets/spending/{month}:
  *   get:
  *     tags: [Budgets]

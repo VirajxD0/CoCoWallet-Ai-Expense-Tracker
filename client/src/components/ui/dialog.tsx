@@ -12,8 +12,8 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
   )
 }
 export function DialogContent({ className, children, onClose }: { className?:string; children:React.ReactNode; onClose?:()=>void }) {
-  return <div className={cn("bg-background border rounded-lg shadow-lg p-6 m-4", className)}>
-    {onClose && <button onClick={onClose} className="absolute right-4 top-4 rounded-sm opacity-70 hover:opacity-100"><X className="h-4 w-4"/></button>}
+  return <div className={cn("relative bg-background border rounded-lg shadow-lg p-6 m-4", className)}>
+    {onClose && <button onClick={onClose} className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"><X className="h-4 w-4"/></button>}
     {children}
   </div>
 }

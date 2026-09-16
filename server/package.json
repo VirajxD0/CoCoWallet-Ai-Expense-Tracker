@@ -25,6 +25,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@types/multer": "^2.2.0",
     "bcryptjs": "^3.0.3",
     "cls-rtracer": "^2.6.4",
     "compression": "^1.8.1",
@@ -38,6 +39,7 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
+    "multer": "^2.4.0",
     "mysql2": "^3.23.4",
     "pino": "^10.3.1",
     "pino-pretty": "^13.1.3",

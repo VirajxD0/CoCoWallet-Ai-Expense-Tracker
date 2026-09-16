@@ -16,6 +16,10 @@ import authRoutes from './modules/auth/auth.routes';
 import expensesRoutes from './modules/expenses/expenses.routes';
 import budgetsRoutes from './modules/budgets/budgets.routes';
 import aiRoutes from './modules/ai/ai.routes';
+import recurringRoutes from './modules/recurring/recurring.routes';
+import goalsRoutes from './modules/goals/goals.routes';
+import alertsRoutes from './modules/alerts/alerts.routes';
+import exportRoutes from './modules/export/export.routes';
 
 /**
  * Express application configuration.
@@ -27,8 +31,20 @@ const app = express();
 app.use(helmet());                          // Secure HTTP headers
 app.use(hpp());                             // HTTP Parameter Pollution protection
 app.use(cors({
-  origin: env.FRONTEND_URL,
-  credentials: true,                        // Allow cookies/credentials
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, mobile apps, server-to-server)
+    if (!origin) return callback(null, true);
+    // In development, allow any localhost port
+    if (env.NODE_ENV === 'development' && /^https?:\/\/localhost:\d+$/.test(origin)) {
+      return callback(null, true);
+    }
+    // In production, only allow configured FRONTEND_URL
+    if (origin === env.FRONTEND_URL) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -84,6 +100,10 @@ app.use(`${apiPrefix}/auth`, authRoutes);
 app.use(`${apiPrefix}/expenses`, expensesRoutes);
 app.use(`${apiPrefix}/budgets`, budgetsRoutes);
 app.use(`${apiPrefix}/ai`, aiRoutes);
+app.use(`${apiPrefix}/recurring`, recurringRoutes);
+app.use(`${apiPrefix}/goals`, goalsRoutes);
+app.use(`${apiPrefix}/alerts`, alertsRoutes);
+app.use(`${apiPrefix}/export`, exportRoutes);
 
 // ─── 404 Handler ────────────────────────────────────────────────────────
 app.use((_req, res) => {

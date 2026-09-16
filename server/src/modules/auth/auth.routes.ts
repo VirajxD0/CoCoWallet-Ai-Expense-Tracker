@@ -3,7 +3,7 @@ import { authController } from "./auth.controller";
 import { validate } from "../../common/middleware/validate";
 import { authenticate } from "../../common/middleware/auth";
 import { authLimiter } from "../../common/middleware/rateLimiter";
-import { signupSchema, loginSchema, refreshTokenSchema } from "./auth.schema";
+import { signupSchema, loginSchema, refreshTokenSchema, changePasswordSchema } from "./auth.schema";
 
 const router = Router();
 
@@ -120,5 +120,39 @@ router.post("/logout", authenticate, authController.logout);
  *         description: Current user
  */
 router.get("/me", authenticate, authController.me);
+
+/**
+ * @swagger
+ * /auth/change-password:
+ *   put:
+ *     tags: [Auth]
+ *     summary: Change password (requires current password)
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [currentPassword, newPassword]
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *               newPassword:
+ *                 type: string
+ *                 minLength: 8
+ *     responses:
+ *       200:
+ *         description: Password changed
+ *       401:
+ *         description: Invalid current password
+ */
+router.put(
+  "/change-password",
+  authenticate,
+  validate(changePasswordSchema),
+  authController.changePassword,
+);
 
 export default router;

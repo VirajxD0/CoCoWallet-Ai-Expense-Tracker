@@ -46,6 +46,14 @@ export class AuthController {
   me = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     sendSuccess(res, { user: req.user }, 200);
   });
+
+  /**
+   * PUT /api/v1/auth/change-password (requires auth)
+   */
+  changePassword = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    await authService.changePassword(req.user!.userId, req.body);
+    sendSuccess(res, { message: 'Password changed successfully. Please log in again.' }, 200);
+  });
 }
 
 export const authController = new AuthController();

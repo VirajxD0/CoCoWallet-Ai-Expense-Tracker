@@ -1,7 +1,7 @@
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "name": "CocoWallet API",
-  "description": "Production-grade REST API for CocoWallet — AI-powered expense tracking. All endpoints require JWT Bearer token except auth routes.",
+  "description": "Production-grade REST API for CocoWallet \u2014 AI-powered expense tracking. All endpoints require JWT Bearer token except auth routes.",
   "variable": [
     {
       "key": "baseUrl",
@@ -26,7 +26,7 @@
     },
     {
       "name": "Auth",
-      "description": "Authentication endpoints — signup, login, refresh, logout, me",
+      "description": "Authentication endpoints \u2014 signup, login, refresh, logout, me",
       "item": [
         {
           "name": "Signup",
@@ -114,6 +114,37 @@
             "description": "Logout and revoke all refresh tokens."
           },
           "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"Test@1234\",\n  \"newPassword\": \"Test@12345\"\n}"
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -127,13 +158,29 @@
             "method": "GET",
             "url": {
               "raw": "{{baseUrl}}/expenses?page=1&limit=20&sortBy=date&sortOrder=desc",
-              "host": ["{{baseUrl}}"],
-              "path": ["expenses"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "expenses"
+              ],
               "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "20" },
-                { "key": "sortBy", "value": "date" },
-                { "key": "sortOrder", "value": "desc" }
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "date"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "desc"
+                }
               ]
             },
             "header": [
@@ -152,15 +199,37 @@
             "method": "GET",
             "url": {
               "raw": "{{baseUrl}}/expenses?page=1&limit=10&search=coffee&category=Food%20%26%20Dining&startDate=2026-01-01&endDate=2026-12-31",
-              "host": ["{{baseUrl}}"],
-              "path": ["expenses"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "expenses"
+              ],
               "query": [
-                { "key": "page", "value": "1" },
-                { "key": "limit", "value": "10" },
-                { "key": "search", "value": "coffee" },
-                { "key": "category", "value": "Food & Dining" },
-                { "key": "startDate", "value": "2026-01-01" },
-                { "key": "endDate", "value": "2026-12-31" }
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": "coffee"
+                },
+                {
+                  "key": "category",
+                  "value": "Food & Dining"
+                },
+                {
+                  "key": "startDate",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                }
               ]
             },
             "header": [
@@ -197,7 +266,7 @@
           "response": []
         },
         {
-          "name": "Create Expense (no category — for AI categorize)",
+          "name": "Create Expense (no category \u2014 for AI categorize)",
           "request": {
             "method": "POST",
             "url": "{{baseUrl}}/expenses",
@@ -215,7 +284,7 @@
               "mode": "raw",
               "raw": "{\n  \"amount\": 15.99,\n  \"description\": \"Uber ride to airport\",\n  \"date\": \"2026-08-21\"\n}"
             },
-            "description": "Create expense without category — then use AI to categorize it."
+            "description": "Create expense without category \u2014 then use AI to categorize it."
           },
           "response": []
         },
@@ -278,11 +347,22 @@
             "method": "GET",
             "url": {
               "raw": "{{baseUrl}}/expenses/stats?startDate=2026-01-01&endDate=2026-12-31",
-              "host": ["{{baseUrl}}"],
-              "path": ["expenses", "stats"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "expenses",
+                "stats"
+              ],
               "query": [
-                { "key": "startDate", "value": "2026-01-01" },
-                { "key": "endDate", "value": "2026-12-31" }
+                {
+                  "key": "startDate",
+                  "value": "2026-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2026-12-31"
+                }
               ]
             },
             "header": [
@@ -345,10 +425,17 @@
             "method": "GET",
             "url": {
               "raw": "{{baseUrl}}/budgets?month=2026-08",
-              "host": ["{{baseUrl}}"],
-              "path": ["budgets"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "budgets"
+              ],
               "query": [
-                { "key": "month", "value": "2026-08" }
+                {
+                  "key": "month",
+                  "value": "2026-08"
+                }
               ]
             },
             "header": [
@@ -524,6 +611,595 @@
               "raw": "{\n  \"query\": \"How much did I spend on food last month?\"\n}"
             },
             "description": "Ask a natural language question about your expenses. AI answers based on your data."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Recurring Expenses",
+      "description": "Recurring expense management with manual run and upcoming preview. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "List Recurring Expenses",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/recurring?page=1&limit=20&is_active=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recurring"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "is_active",
+                  "value": "true"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get paginated list of recurring expenses. Filter by is_active."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Recurring Expense by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recurring/{{recurringId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get a single recurring expense by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Recurring Expense",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recurring",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 15.99,\n  \"description\": \"Netflix subscription\",\n  \"category\": \"Entertainment\",\n  \"frequency\": \"monthly\",\n  \"start_date\": \"2026-01-01\",\n  \"end_date\": \"2026-12-31\",\n  \"notes\": \"Monthly Netflix plan\"\n}"
+            },
+            "description": "Create a new recurring expense. Frequency: daily, weekly, monthly, yearly."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Recurring Expense",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/recurring/{{recurringId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 17.99,\n  \"is_active\": true\n}"
+            },
+            "description": "Update a recurring expense. Only send fields you want to change."
+          },
+          "response": []
+        },
+        {
+          "name": "Run Recurring Expense Now",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/recurring/{{recurringId}}/run",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Manually trigger this recurring expense to create an expense entry now."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Upcoming (Next 30 Days)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recurring/upcoming?days=30",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Preview all recurring expenses due in the next 30 days."
+          },
+          "response": []
+        },
+        {
+          "name": "Get With Next Run Dates",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/recurring/with-next-run",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get all recurring expenses with days until next run calculated."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Recurring Expense",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/recurring/{{recurringId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Delete a recurring expense."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Goals",
+      "description": "Savings goals with progress tracking, allocations, and auto-allocation. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "List Goals",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/goals?page=1&limit=20&include_completed=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "goals"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "include_completed",
+                  "value": "false"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get paginated list of goals. Use include_completed=true to see finished goals."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Goals With Progress",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/goals/with-progress",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get all goals with calculated progress percentage, remaining amount, and days remaining."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Goal by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/goals/{{goalId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get a single goal by ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Goal",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/goals",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Emergency Fund\",\n  \"target_amount\": 10000,\n  \"current_amount\": 2500,\n  \"target_date\": \"2026-12-31\",\n  \"category\": \"Savings\",\n  \"icon\": \"piggy-bank\",\n  \"color\": \"#10b981\",\n  \"auto_allocate_pct\": 20\n}"
+            },
+            "description": "Create a new savings goal. auto_allocate_pct = % of monthly surplus to auto-allocate."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Goal",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/goals/{{goalId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"current_amount\": 3000,\n  \"auto_allocate_pct\": 25\n}"
+            },
+            "description": "Update a goal. Only send fields you want to change."
+          },
+          "response": []
+        },
+        {
+          "name": "Allocate Funds to Goal",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/goals/{{goalId}}/allocate",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 500,\n  \"source\": \"manual\"\n}"
+            },
+            "description": "Add funds to a goal. source: manual, auto_surplus, or recurring."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Goal Allocations",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/goals/{{goalId}}/allocations",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get all allocation history for a goal."
+          },
+          "response": []
+        },
+        {
+          "name": "Calculate Monthly Surplus",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/goals/surplus?month=2026-08",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Calculate monthly income, expenses, surplus, and suggested allocations per goal."
+          },
+          "response": []
+        },
+        {
+          "name": "Auto-Allocate Surplus",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/goals/auto-allocate?month=2026-08",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Automatically allocate monthly surplus to goals based on their auto_allocate_pct."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Goal",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/goals/{{goalId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Delete a goal."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Alerts",
+      "description": "In-app alerts for budgets, anomalies, recurring due, and goal milestones. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "List Alerts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/alerts?page=1&limit=20&is_read=false",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alerts"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "is_read",
+                  "value": "false"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get paginated alerts. Filter by is_read (true/false) or type (budget_warning, budget_exceeded, unusual_spending, recurring_due, goal_milestone, goal_completed)."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Unread Count",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/alerts/unread-count",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get count of unread alerts for the bell badge."
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Alert as Read",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/alerts/{{alertId}}/read",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Mark a single alert as read."
+          },
+          "response": []
+        },
+        {
+          "name": "Mark All Alerts Read",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/alerts/read-all",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Mark all alerts as read."
+          },
+          "response": []
+        },
+        {
+          "name": "Check & Create Alerts",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/alerts/check",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Manually trigger alert checks: budgets (80%/100%), anomalies (Z-score > 2), recurring due, goal milestones (25/50/75/100%)."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Export/Import",
+      "description": "Full data export (JSON/CSV) and import with history. All endpoints require JWT auth.",
+      "item": [
+        {
+          "name": "Export Data",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/export?format=json&includeExpenses=true&includeBudgets=true&includeRecurring=true&includeGoals=true&includeAllocations=true",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "key": "includeExpenses",
+                  "value": "true"
+                },
+                {
+                  "key": "includeBudgets",
+                  "value": "true"
+                },
+                {
+                  "key": "includeRecurring",
+                  "value": "true"
+                },
+                {
+                  "key": "includeGoals",
+                  "value": "true"
+                },
+                {
+                  "key": "includeAllocations",
+                  "value": "true"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Export all data as JSON (complete) or CSV (expenses only). Optional: startDate, endDate, format (json/csv)."
+          },
+          "response": []
+        },
+        {
+          "name": "Export History",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/export/history",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Get list of past export jobs with status, record counts, and download links."
+          },
+          "response": []
+        },
+        {
+          "name": "Download Export File",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/export/download/{{exportJobId}}",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "description": "Direct download of a completed export file. Use jobId from export history."
+          },
+          "response": []
+        },
+        {
+          "name": "Import Data",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/export/import",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/export.json"
+                },
+                {
+                  "key": "format",
+                  "value": "json",
+                  "type": "text"
+                },
+                {
+                  "key": "skipExisting",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "description": "Import data from a JSON or CSV export file. Use form-data with file upload. skipExisting=true prevents duplicates."
           },
           "response": []
         }

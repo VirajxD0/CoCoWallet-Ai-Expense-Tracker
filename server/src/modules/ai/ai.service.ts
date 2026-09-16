@@ -20,7 +20,7 @@ export class AiService {
    * Call Gemini API with a prompt — tries multiple models, surfaces real error.
    */
   private async callGemini(prompt: string): Promise<string> {
-    const models = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-2.0-flash-exp'];
+    const models = ['gemini-2.0-flash', 'gemini-2.5-flash'];
     let lastError = '';
     let lastStatus = 0;
     for (const model of models) {
@@ -232,7 +232,60 @@ Rules:
 - If the question can't be answered from the data, say so
 - Format numbers as currency (₹X) using Indian Rupee symbol and en-IN formatting`;
 
-    const answer = await this.callGemini(prompt);
+    let answer: string;
+    try {
+      answer = await this.callGemini(prompt);
+    } catch (e: any) {
+      logger.warn({ err: e.message }, 'Gemini failed — falling back to local answer');
+      // Fallback: answer from data directly without AI
+      const totalSpent = expenses.reduce((sum, e) => sum + Number(e.amount), 0);
+      const byCategory = new Map<string, number>();
+      expenses.forEach(e => {
+        byCategory.set(e.category || 'Uncategorized', (byCategory.get(e.category || 'Uncategorized') || 0) + Number(e.amount));
+      });
+
+      const currentMonth = new Date().toISOString().slice(0, 7);
+      const currentMonthExpenses = expenses.filter(e => {
+        const d = typeof e.date === 'string' ? e.date : new Date(e.date as any).toISOString().split('T')[0];
+        return d.startsWith(currentMonth);
+      });
+      const monthSpent = currentMonthExpenses.reduce((sum, e) => sum + Number(e.amount), 0);
+      const monthByCategory = new Map<string, number>();
+      currentMonthExpenses.forEach(e => {
+        monthByCategory.set(e.category || 'Uncategorized', (monthByCategory.get(e.category || 'Uncategorized') || 0) + Number(e.amount));
+      });
+
+      const q = input.query.toLowerCase();
+
+      if (q.includes('total') && (q.includes('month') || q.includes('this'))) {
+        answer = `You've spent ₹${monthSpent.toLocaleString('en-IN')} this month (${currentMonthExpenses.length} transactions).`;
+      } else if (q.includes('total')) {
+        answer = `You've spent ₹${totalSpent.toLocaleString('en-IN')} in total across ${expenses.length} transactions.`;
+      } else if (q.includes('food') || q.includes('dining')) {
+        const food = monthByCategory.get('Food & Dining') || 0;
+        answer = `You spent ₹${food.toLocaleString('en-IN')} on Food & Dining this month (${currentMonth}).`;
+      } else if (q.includes('transport')) {
+        const transport = monthByCategory.get('Transport') || 0;
+        answer = `You spent ₹${transport.toLocaleString('en-IN')} on Transport this month (${currentMonth}).`;
+      } else if (q.includes('shopping')) {
+        const shopping = monthByCategory.get('Shopping') || 0;
+        answer = `You spent ₹${shopping.toLocaleString('en-IN')} on Shopping this month (${currentMonth}).`;
+      } else if (q.includes('entertainment')) {
+        const ent = monthByCategory.get('Entertainment') || 0;
+        answer = `You spent ₹${ent.toLocaleString('en-IN')} on Entertainment this month (${currentMonth}).`;
+      } else if (q.includes('top') || q.includes('most') || q.includes('highest')) {
+        const sorted = Array.from(monthByCategory.entries()).sort((a, b) => b[1] - a[1]);
+        const top = sorted[0];
+        answer = top ? `Your top spending category this month is ${top[0]} at ₹${top[1].toLocaleString('en-IN')}.` : 'No spending data for this month.';
+      } else {
+        // Generic summary
+        const lines = Array.from(monthByCategory.entries())
+          .sort((a, b) => b[1] - a[1])
+          .map(([cat, amt]) => `• ${cat}: ₹${amt.toLocaleString('en-IN')}`)
+          .join('\n');
+        answer = `Here's your spending breakdown for ${currentMonth} (total: ₹${monthSpent.toLocaleString('en-IN')}):\n${lines || 'No data yet.'}`;
+      }
+    }
 
     return { answer };
   }

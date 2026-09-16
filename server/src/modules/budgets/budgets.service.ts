@@ -43,6 +43,13 @@ export class BudgetsService {
   }
 
   /**
+   * Get distinct categories from budgets.
+   */
+  async getCategories(userId: string): Promise<string[]> {
+    return budgetsRepository.getCategories(userId);
+  }
+
+  /**
    * Get budgets with actual spending for comparison.
    */
   async getBudgetsWithSpending(userId: string, month: string): Promise<BudgetWithSpending[]> {

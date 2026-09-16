@@ -98,6 +98,17 @@ export class BudgetsRepository {
   }
 
   /**
+   * Get distinct categories from budgets for a user.
+   */
+  async getCategories(userId: string): Promise<string[]> {
+    const rows = await query<{ category: string }>(
+      'SELECT DISTINCT category FROM budgets WHERE user_id = ? ORDER BY category',
+      [userId]
+    );
+    return rows.map((r) => r.category);
+  }
+
+  /**
    * Get budgets with spending data for a given month.
    */
   async getBudgetsWithSpending(userId: string, month: string): Promise<BudgetWithSpending[]> {
@@ -113,7 +124,10 @@ export class BudgetsRepository {
 
     // Get spending for each category in that month
     const startDate = `${month}-01`;
-    const endDate = `${month}-31`;
+    // Calculate actual last day of month (handles Feb, Apr, Jun, Sep, Nov)
+    const [y, m] = month.split('-').map(Number);
+    const lastDay = new Date(y, m, 0).getDate();
+    const endDate = `${month}-${String(lastDay).padStart(2, '0')}`;
 
     const expenses = await query<{ category: string; amount: number }>(
       `SELECT category, amount FROM expenses

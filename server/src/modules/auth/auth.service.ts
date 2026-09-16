@@ -7,7 +7,7 @@ import {
   verifyRefreshToken,
 } from '../../common/middleware/auth';
 import { UnauthorizedError, ValidationError } from '../../common/errors';
-import { SignupInput, LoginInput } from './auth.schema';
+import { SignupInput, LoginInput, ChangePasswordInput } from './auth.schema';
 import { SignupResponse, LoginResponse } from './auth.types';
 import logger from '../../config/logger';
 
@@ -160,6 +160,48 @@ export class AuthService {
     );
 
     logger.info({ userId }, 'User logged out');
+  }
+
+  /**
+   * Change password — requires current password verification.
+   */
+  async changePassword(userId: string, input: ChangePasswordInput): Promise<void> {
+    // Fetch current user
+    const user = await queryOne<{ id: string; password_hash: string }>(
+      'SELECT id, password_hash FROM users WHERE id = ?',
+      [userId]
+    );
+
+    if (!user) {
+      throw new UnauthorizedError('User not found');
+    }
+
+    // Verify current password
+    const isValid = await bcrypt.compare(input.currentPassword, user.password_hash);
+    if (!isValid) {
+      throw new UnauthorizedError('Current password is incorrect');
+    }
+
+    // Check new password is different
+    const isSame = await bcrypt.compare(input.newPassword, user.password_hash);
+    if (isSame) {
+      throw new ValidationError('New password must be different from current password');
+    }
+
+    // Hash and update
+    const passwordHash = await bcrypt.hash(input.newPassword, SALT_ROUNDS);
+    await execute(
+      'UPDATE users SET password_hash = ? WHERE id = ?',
+      [passwordHash, userId]
+    );
+
+    // Revoke all existing refresh tokens (force re-login on all devices)
+    await execute(
+      'UPDATE refresh_tokens SET revoked = 1 WHERE user_id = ?',
+      [userId]
+    );
+
+    logger.info({ userId }, 'Password changed successfully');
   }
 }
 

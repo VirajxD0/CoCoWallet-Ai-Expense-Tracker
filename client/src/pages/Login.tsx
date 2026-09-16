@@ -9,8 +9,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Logo } from '@/components/brand/Logo'
+import { Navbar } from '@/components/marketing/Navbar'
 import logo from '@/assets/icons/CoCoWalletLogo-512.png'
-import { Eye, EyeOff, Mail, Lock, ArrowRight, Sparkles, ShieldCheck, Check, Quote, Home, Star } from 'lucide-react'
+import { Eye, EyeOff, Mail, Lock, ArrowRight, ShieldCheck, Check, Home, Copy, FlaskConical, KeyRound } from 'lucide-react'
 
 const schema = z.object({ email: z.string().email(), password: z.string().min(1) })
 type Form = z.infer<typeof schema>
@@ -22,7 +23,14 @@ export default function Login() {
   const setAuth = useAuthStore(s=>s.setAuth)
   const [error, setError] = useState('')
   const [showPw, setShowPw] = useState(false)
-  const { register, handleSubmit, formState:{ errors, isSubmitting } } = useForm<Form>({ resolver: zodResolver(schema) })
+  const [copied, setCopied] = useState<string | null>(null)
+  const { register, handleSubmit, setValue, formState:{ errors, isSubmitting } } = useForm<Form>({ resolver: zodResolver(schema) })
+  const TEST_EMAIL = 'deshmukhviraj654@gmail.com'
+  const TEST_PASS = 'Test@1234'
+  const copy = async (text: string, key: string) => {
+    try { await navigator.clipboard.writeText(text); setCopied(key); setTimeout(()=>setCopied(null), 1500) } catch {}
+  }
+  const fillTest = () => { setValue('email', TEST_EMAIL); setValue('password', TEST_PASS) }
   const onSubmit = async (data: Form) => {
     setError('')
     try {
@@ -34,7 +42,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
+      <Navbar />
+      <div className="flex-1 flex flex-col lg:flex-row min-h-0">
       {/* LEFT — Panda brand (desktop) */}
       <div className="hidden lg:flex lg:w-[54%] relative overflow-hidden gradient-navy text-white">
         {/* pattern & glows */}
@@ -82,16 +92,6 @@ export default function Login() {
               ))}
             </div>
 
-            <div className="mt-8 rounded-2xl bg-white/[0.07] backdrop-blur border border-white/10 p-4 flex gap-3">
-              <img src="https://i.pravatar.cc/100?img=32" alt="" className="h-9 w-9 rounded-full object-cover shrink-0" />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1 text-amber-300">{[1,2,3,4,5].map(i=> <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />)} <span className="text-xs font-bold text-white ml-1">4.9/5</span></div>
-                <p className="text-sm font-medium leading-snug mt-1">“CoCo saved me ₹18k in 2 months. Login takes 2 seconds, value lasts all month.”</p>
-                <p className="text-xs text-white/60 mt-1">Ananya S. • Bengaluru</p>
-              </div>
-              <Quote className="h-5 w-5 text-white/20 shrink-0" />
-            </div>
-
             <div className="mt-6 flex flex-wrap gap-2 text-xs font-medium">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-3 py-1.5"><ShieldCheck className="h-3.5 w-3.5 text-emerald-300" /> Bank-grade security</span>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/15 px-3 py-1.5"><Check className="h-3.5 w-3.5 text-emerald-300" /> No spam, ever</span>
@@ -137,6 +137,43 @@ export default function Login() {
             </div>
 
             <div className="px-7 sm:px-8 py-6">
+              {/* Test credentials */}
+              <div className="mb-5 rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50/50 p-3.5 shadow-sm">
+                <div className="flex items-center justify-between gap-2 mb-2.5">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-amber-800">
+                    <span className="h-6 w-6 rounded-full bg-amber-500 text-white flex items-center justify-center"><FlaskConical className="h-3.5 w-3.5" /></span>
+                    For testing — use below
+                  </span>
+                  <button type="button" onClick={fillTest} className="text-xs font-bold text-primary hover:text-primary/80 bg-white border border-amber-200 rounded-full px-3 py-1 shadow-sm hover:shadow transition-all">Fill →</button>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 rounded-xl bg-white border border-amber-200/70 px-3 py-2.5">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0"><Mail className="h-3.5 w-3.5 text-primary" /></span>
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-bold tracking-widest uppercase text-muted-foreground leading-none">Email</p>
+                        <p className="text-sm font-semibold truncate">{TEST_EMAIL}</p>
+                      </div>
+                    </div>
+                    <button type="button" onClick={()=>copy(TEST_EMAIL, 'email')} className="h-8 w-8 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center shrink-0 transition-colors" aria-label="Copy email">
+                      {copied==='email' ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between gap-2 rounded-xl bg-white border border-amber-200/70 px-3 py-2.5">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="h-7 w-7 rounded-full bg-gold/20 flex items-center justify-center shrink-0"><KeyRound className="h-3.5 w-3.5 text-amber-700" /></span>
+                      <div className="min-w-0">
+                        <p className="text-[11px] font-bold tracking-widest uppercase text-muted-foreground leading-none">Password</p>
+                        <p className="text-sm font-semibold truncate font-mono">{TEST_PASS}</p>
+                      </div>
+                    </div>
+                    <button type="button" onClick={()=>copy(TEST_PASS, 'pass')} className="h-8 w-8 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center shrink-0 transition-colors" aria-label="Copy password">
+                      {copied==='pass' ? <Check className="h-4 w-4 text-emerald-600" /> : <Copy className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {justRegistered && !error && <div className="flex items-start gap-2 p-3 rounded-xl bg-emerald-50 text-emerald-700 text-sm border border-emerald-200"><span className="mt-0.5">✓</span><span>Account created successfully — please sign in.</span></div>}
                 {error && <div className="flex items-start gap-2 p-3 rounded-xl bg-destructive/10 text-destructive text-sm border border-destructive/20"><span className="mt-0.5">⚠️</span><span>{error}</span></div>}
@@ -188,19 +225,12 @@ export default function Login() {
                 <p className="text-center text-sm text-muted-foreground pt-2">No account? <Link to="/signup" className="text-primary hover:underline font-bold inline-flex items-center gap-1">Create account <ArrowRight className="h-3.5 w-3.5"/></Link></p>
                 <p className="text-center"><Link to="/" className="text-xs font-medium text-muted-foreground hover:text-foreground inline-flex items-center gap-1">← Back to home</Link></p>
               </form>
-
-              <div className="mt-6 rounded-2xl bg-primary text-primary-foreground p-4 flex gap-3">
-                <div className="h-9 w-9 rounded-xl bg-white/15 flex items-center justify-center shrink-0"><Sparkles className="h-4 w-4" /></div>
-                <div>
-                  <p className="text-sm font-bold leading-none">New here? Try CoCo in 30 seconds</p>
-                  <p className="text-xs text-white/70 mt-1.5 leading-relaxed">No credit card • Free forever • Bank-grade security</p>
-                </div>
-              </div>
             </div>
           </div>
 
           <p className="text-center text-[11px] text-muted-foreground mt-4 px-4 leading-relaxed">By signing in you agree to our <a href="#" className="underline hover:text-foreground">Terms</a> & <a href="#" className="underline hover:text-foreground">Privacy</a>. CoCo never sells your data. 🐼</p>
         </div>
+      </div>
       </div>
     </div>
   )

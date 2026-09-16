@@ -6,13 +6,15 @@ const mockQuery = jest.fn()
 const mockQueryOne = jest.fn()
 const mockInsert = jest.fn().mockResolvedValue('mock-id')
 const mockExecute = jest.fn().mockResolvedValue(1)
+const mockPoolExecute = jest.fn().mockResolvedValue([{ affectedRows: 1 }])
+const mockPoolQuery = jest.fn().mockResolvedValue([{ affectedRows: 2 }])
 
 jest.mock('../../src/config/database', () => ({
-  query: (...a:any[]) => mockQuery(...a),
-  queryOne: (...a:any[]) => mockQueryOne(...a),
-  insert: (...a:any[]) => mockInsert(...a),
-  execute: (...a:any[]) => mockExecute(...a),
-  getPool: () => ({ execute: jest.fn().mockResolvedValue([{ affectedRows: 1 }]) }),
+  query: (...a: any[]) => mockQuery(...a),
+  queryOne: (...a: any[]) => mockQueryOne(...a),
+  insert: (...a: any[]) => mockInsert(...a),
+  execute: (...a: any[]) => mockExecute(...a),
+  getPool: () => ({ execute: mockPoolExecute, query: mockPoolQuery }),
   initDatabase: jest.fn(),
 }))
 
@@ -93,7 +95,7 @@ describe('Auth routes', () => {
 describe('Expenses routes (authenticated)', () => {
   const header = authHeader()
 
-  beforeEach(()=> { jest.clearAllMocks(); mockQuery.mockReset(); mockQueryOne.mockReset() })
+  beforeEach(()=> { jest.clearAllMocks(); mockQuery.mockReset(); mockQueryOne.mockReset(); mockPoolExecute.mockReset(); mockPoolQuery.mockReset() })
 
   it('GET /api/v1/expenses requires auth 401', async () => {
     const res = await request(app).get('/api/v1/expenses')
@@ -129,7 +131,10 @@ describe('Expenses routes (authenticated)', () => {
   })
 
   it('POST /api/v1/expenses/import bulk', async () => {
+    mockInsert.mockResolvedValueOnce('mock-id')
+    mockPoolQuery.mockResolvedValueOnce([{ affectedRows: 2 }])
     const res = await request(app).post('/api/v1/expenses/import').set('Authorization', header).send({ expenses: [{ amount: 10, description: 'a' }, { amount: 20, description: 'b' }] })
+    if (res.status !== 201) console.log('Error:', JSON.stringify(res.body, null, 2))
     expect(res.status).toBe(201)
   })
 

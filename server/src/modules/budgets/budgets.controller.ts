@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { budgetsService } from './budgets.service';
+import { alertsService } from '../alerts/alerts.service';
 import { sendSuccess } from '../../common/utils/apiResponse';
 import { asyncHandler } from '../../common/utils/asyncHandler';
 
@@ -29,6 +30,7 @@ export class BudgetsController {
    */
   upsert = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const budget = await budgetsService.upsert(req.user!.userId, req.body);
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, budget, 201);
   });
 
@@ -38,6 +40,7 @@ export class BudgetsController {
   update = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
     const budget = await budgetsService.update(id, req.user!.userId, req.body);
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, budget, 200);
   });
 
@@ -47,7 +50,16 @@ export class BudgetsController {
   delete = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
     await budgetsService.delete(id, req.user!.userId);
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, { message: 'Budget deleted' }, 200);
+  });
+
+  /**
+   * GET /api/v1/budgets/categories
+   */
+  categories = asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    const categories = await budgetsService.getCategories(req.user!.userId);
+    sendSuccess(res, categories, 200);
   });
 
   /**

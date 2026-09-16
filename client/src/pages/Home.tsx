@@ -22,10 +22,13 @@ import {
   ArrowUpRight,
   Star,
   Play,
-  Quote,
   Layers,
   Lock,
   Globe,
+  Repeat,
+  Target,
+  Bell,
+  Download,
 } from 'lucide-react'
 
 export default function Home() {
@@ -255,6 +258,34 @@ export default function Home() {
                 desc: 'JWT access+refresh rotation, bcrypt 12 rounds, Helmet, rate-limit & HttpOnly-ready. Your data stays yours.',
                 accent: 'from-slate-800 to-slate-600',
                 badge: 'Bank-grade',
+              },
+              {
+                icon: Repeat,
+                title: 'Recurring Expenses',
+                desc: 'Set up daily, weekly, monthly, or yearly recurring expenses. Run manually or automate with one click.',
+                accent: 'from-indigo-600 to-purple-600',
+                badge: 'Auto-create',
+              },
+              {
+                icon: Target,
+                title: 'Savings Goals',
+                desc: 'Set targets with deadlines. Auto-allocate monthly surplus. Track progress with visual rings.',
+                accent: 'from-emerald-600 to-teal-500',
+                badge: 'Progress rings',
+              },
+              {
+                icon: Bell,
+                title: 'Smart Alerts',
+                desc: 'Budget warnings at 80%, exceeded at 100%, unusual spending detection, goal milestones.',
+                accent: 'from-amber-600 to-orange-500',
+                badge: 'In-app only',
+              },
+              {
+                icon: Download,
+                title: 'Full Data Export',
+                desc: 'Export all your data as JSON or CSV. Import back anytime. Complete backup/restore.',
+                accent: 'from-violet-600 to-indigo-500',
+                badge: 'JSON + CSV',
               },
             ].map(f => (
               <div key={f.title} className="group relative rounded-[24px] bg-white border p-6 lg:p-7 shadow-premium hover:shadow-xl hover:-translate-y-1 transition-all">
@@ -496,27 +527,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIAL */}
+      {/* STATS */}
       <section className="py-16">
-        <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8">
           <div className="rounded-[28px] bg-secondary/40 border p-8 lg:p-10">
-            <div className="grid lg:grid-cols-3 gap-8 items-center">
-              <div className="lg:col-span-2 space-y-4">
-                <Quote className="h-8 w-8 text-primary" />
-                <p className="font-display font-bold text-xl sm:text-2xl leading-snug">“CoCoWallet saved me ₹18,000 in 2 months. The AI actually gets it — no more tagging Swiggy as ‘Other’.”</p>
-                <div className="flex items-center gap-3">
-                  <img src="https://i.pravatar.cc/100?img=32" alt="" className="h-10 w-10 rounded-full object-cover" />
-                  <div><p className="font-semibold text-sm">Ananya S.</p><p className="text-xs text-muted-foreground">Product designer, Bengaluru • Pro user since Jan 2025</p></div>
-                  <div className="ml-auto hidden sm:flex gap-1">{[1,2,3,4,5].map(i=> <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />)}</div>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-3 lg:pl-6">
-                {[
-                  { v: '4.9/5', l: 'avg rating' },
-                  { v: '2k+', l: 'reviews' },
-                  { v: '10k+', l: 'users' },
-                ].map(s=> <div key={s.v} className="rounded-2xl bg-white border p-4 text-center"><p className="font-display font-extrabold text-xl">{s.v}</p><p className="text-[11px] font-bold tracking-widest uppercase text-muted-foreground">{s.l}</p></div>)}
-              </div>
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { v: '4.9/5', l: 'avg rating' },
+                { v: '2k+', l: 'reviews' },
+                { v: '10k+', l: 'users' },
+              ].map(s=> <div key={s.v} className="rounded-2xl bg-white border p-6 text-center"><p className="font-display font-extrabold text-2xl">{s.v}</p><p className="text-[11px] font-bold tracking-widest uppercase text-muted-foreground">{s.l}</p></div>)}
             </div>
           </div>
         </div>

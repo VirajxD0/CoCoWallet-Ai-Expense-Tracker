@@ -1,4 +1,4 @@
-# CocoWallet 🥥💸
+# CocoWallet 🐼💸
 
 > Production-grade, AI-powered personal finance tracker — Track expenses, manage budgets, and ask natural language questions about your money.
 
@@ -27,6 +27,29 @@ Built with **Node.js • Express 5 • TypeScript • MySQL (Aiven) • Google G
 - **Bulk CSV import** — up to **1000** expenses in one request via `PapaParse` + preview
 - **Stats** — total spent, count, avg/transaction, top 10 categories
 - Distinct **categories** endpoint for combobox
+
+### 🔄 Recurring Expenses
+- **Flexible frequencies** — Daily, Weekly, Monthly, Yearly
+- **Manual or automated** — "Run Now" button + ready for cron
+- **Upcoming preview** — See next 30 days at a glance
+
+### 🎯 Savings Goals
+- **Visual progress rings** — See completion percentage instantly
+- **Auto-allocate surplus** — Set % of monthly surplus to flow into goals
+- **Milestone alerts** — 25%, 50%, 75%, 100% notifications
+- **Allocation history** — Track every contribution with source
+
+### 🔔 Smart Alerts (In-App)
+- **Budget warnings** — 80% (warning) → 100% (exceeded)
+- **Anomaly detection** — Unusual spending spikes (Z-score > 2)
+- **Recurring due** — Never miss a subscription payment
+- **Goal milestones** — Celebrate progress automatically
+
+### 📦 Data Portability
+- **Full export** — JSON (complete) or CSV (spreadsheet-ready)
+- **Selective filters** — Date range, categories, modules
+- **Import & restore** — Drag-drop backup file to restore
+- **Audit trail** — Export history with record counts
 
 ### 📊 Budgets
 - Monthly budgets per category (`month: YYYY-MM`) with **upsert** (`UK user+category+month`)
@@ -170,6 +193,45 @@ curl http://localhost:3001/health
 | PUT | `/budgets/:id` | `{monthly_limit}` |
 | DELETE | `/budgets/:id` |  |
 
+### Recurring Expenses (Bearer required)
+| Method | Endpoint | Body/Query |
+|---|---|---|
+| GET | `/recurring` | `?page&limit&is_active` |
+| POST | `/recurring` | `{amount, description, category?, frequency, start_date, end_date?}` |
+| PUT | `/recurring/:id` | partial |
+| DELETE | `/recurring/:id` | |
+| POST | `/recurring/:id/run` | Creates expense for this occurrence |
+| GET | `/recurring/upcoming` | `?days=30` — next 30 days preview |
+
+### Goals (Bearer required)
+| Method | Endpoint | Body |
+|---|---|---|
+| GET | `/goals` | `?page&limit&include_completed` |
+| GET | `/goals/with-progress` | All goals with progress % |
+| POST | `/goals` | `{name, target_amount, current_amount?, target_date?, category?, icon?, color?, auto_allocate_pct?}` |
+| PUT | `/goals/:id` | partial |
+| DELETE | `/goals/:id` | |
+| POST | `/goals/:id/allocate` | `{amount, source?}` — manual/auto_surplus/recurring |
+| GET | `/goals/surplus` | `?month=YYYY-MM` — monthly surplus calc |
+| POST | `/goals/auto-allocate` | `?month=YYYY-MM` — auto allocate surplus |
+
+### Alerts (Bearer required)
+| Method | Endpoint |
+|---|---|
+| GET | `/alerts` | `?page&limit&is_read&type` |
+| GET | `/alerts/unread-count` | |
+| PUT | `/alerts/:id/read` | |
+| PUT | `/alerts/read-all` | |
+| POST | `/alerts/check` | Triggers budget/anomaly/recurring/goal checks |
+
+### Export/Import (Bearer required)
+| Method | Endpoint | Query/Body |
+|---|---|---|
+| GET | `/export` | `?format=json|csv&startDate&endDate&includeExpenses&includeBudgets&includeRecurring&includeGoals&includeAllocations` |
+| GET | `/export/history` | |
+| GET | `/export/download/:jobId` | Direct file download |
+| POST | `/export/import` | multipart/form-data `file` + `format` + `skipExisting` |
+
 ### AI
 | Method | Endpoint |  |
 |---|---|---|
@@ -228,11 +290,11 @@ Env validation crashes on missing keys — never runs with undefined secrets.
 │   │   ├── lib/{api,utils,types}
 │   │   ├── stores/authStore (Zustand)
 │   │   ├── components/{ui,layout/AppShell}
-│   │   └── pages/{Login,Signup,Dashboard,Expenses,Budgets,AIAssistant}
+│   │   └── pages/{Login,Signup,Dashboard,Expenses,Budgets,Recurring,Goals,Alerts,AIAssistant,Settings}
 │   ├── vite.config.ts + tailwind + postcss
 │   └── dist/ (build)
 └── server/
-    ├── src/{app,server,config,database|env|logger|swagger,common,modules/{auth,expenses,budgets,ai}}
+    ├── src/{app,server,config,database|env|logger|swagger,common,modules/{auth,expenses,budgets,recurring,goals,alerts,export,ai}}
     ├── supabase/migrations/001_initial.sql
     ├── tests/{unit,integration,setup.ts}
     ├── jest.config.js + .eslintrc.json

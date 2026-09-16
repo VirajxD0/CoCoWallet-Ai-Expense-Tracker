@@ -1,0 +1,480 @@
+{
+  "exportedAt": "2026-09-16T09:16:38.354Z",
+  "user": {
+    "id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+    "email": "deshmukhviraj654@gmail.com",
+    "name": "Viraj Deshmukh"
+  },
+  "expenses": {
+    "expenses": [
+      {
+        "id": "1c7accd3-e21f-4f82-a444-e641b4d10969",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "250.00",
+        "description": "Spotify premium",
+        "category": "Entertainment",
+        "receipt_url": null,
+        "date": "2026-09-10T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:15.000Z",
+        "updated_at": "2026-09-15T15:05:15.000Z"
+      },
+      {
+        "id": "6d76f706-b7ab-4f21-9774-62e6a3031872",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "2100.00",
+        "description": "Running shoes from Decathlon",
+        "category": "Shopping",
+        "receipt_url": null,
+        "date": "2026-09-09T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:14.000Z",
+        "updated_at": "2026-09-15T15:05:14.000Z"
+      },
+      {
+        "id": "3a5351bc-a031-4b58-88e8-cf21c0398644",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "600.00",
+        "description": "Water bill",
+        "category": "Bills & Utilities",
+        "receipt_url": null,
+        "date": "2026-09-08T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:16.000Z",
+        "updated_at": "2026-09-15T15:05:16.000Z"
+      },
+      {
+        "id": "355d82b3-0e60-479f-9b7b-e793a925f261",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "150.00",
+        "description": "Metro card recharge",
+        "category": "Transport",
+        "receipt_url": null,
+        "date": "2026-09-08T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:13.000Z",
+        "updated_at": "2026-09-15T15:05:13.000Z"
+      },
+      {
+        "id": "d5390332-477d-4216-a088-ef57828e1266",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "350.00",
+        "description": "Movie tickets - PVR",
+        "category": "Entertainment",
+        "receipt_url": null,
+        "date": "2026-09-07T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:15.000Z",
+        "updated_at": "2026-09-15T15:05:15.000Z"
+      },
+      {
+        "id": "3661570b-d732-4d24-b097-62631555ffe0",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "680.00",
+        "description": "Weekend brunch with friends",
+        "category": "Food & Dining",
+        "receipt_url": null,
+        "date": "2026-09-07T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:12.000Z",
+        "updated_at": "2026-09-15T15:05:12.000Z"
+      },
+      {
+        "id": "f2d12dc6-1096-4dc1-ac43-23cf31b44b4f",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "1200.00",
+        "description": "Mobile recharge - Jio",
+        "category": "Bills & Utilities",
+        "receipt_url": null,
+        "date": "2026-09-06T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:16.000Z",
+        "updated_at": "2026-09-15T15:05:16.000Z"
+      },
+      {
+        "id": "6a62e6dd-651f-40d4-bbdb-08d598bcd680",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "800.00",
+        "description": "Petrol fill-up",
+        "category": "Transport",
+        "receipt_url": null,
+        "date": "2026-09-06T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:13.000Z",
+        "updated_at": "2026-09-15T15:05:13.000Z"
+      },
+      {
+        "id": "80ea7a6a-54a7-4fc8-b8c1-b9be5718ed9f",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "750.00",
+        "description": "Pharmacy - medicines",
+        "category": "Health",
+        "receipt_url": null,
+        "date": "2026-09-05T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:17.000Z",
+        "updated_at": "2026-09-15T15:05:17.000Z"
+      },
+      {
+        "id": "48ff130e-457c-44a5-8276-860e38bf9dda",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "450.00",
+        "description": "Dinner at Domino's",
+        "category": "Food & Dining",
+        "receipt_url": null,
+        "date": "2026-09-05T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:11.000Z",
+        "updated_at": "2026-09-15T15:05:11.000Z"
+      },
+      {
+        "id": "02fb4889-9f52-4cfc-9a34-78e30b37ec22",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "499.00",
+        "description": "T-shirt from Myntra",
+        "category": "Shopping",
+        "receipt_url": null,
+        "date": "2026-09-05T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:13.000Z",
+        "updated_at": "2026-09-15T15:05:13.000Z"
+      },
+      {
+        "id": "7a794761-4184-4f1a-b279-b691df05fd5d",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "850.00",
+        "description": "Internet bill - Airtel",
+        "category": "Bills & Utilities",
+        "receipt_url": null,
+        "date": "2026-09-04T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:16.000Z",
+        "updated_at": "2026-09-15T15:05:16.000Z"
+      },
+      {
+        "id": "628a6e13-319a-40d1-962d-7f7128be17f8",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "350.00",
+        "description": "Uber ride to office",
+        "category": "Transport",
+        "receipt_url": null,
+        "date": "2026-09-04T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:12.000Z",
+        "updated_at": "2026-09-15T15:05:12.000Z"
+      },
+      {
+        "id": "42f8c501-1ecc-4aea-9de5-851c3fe29024",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "2400.00",
+        "description": "Grocery shopping at BigBasket",
+        "category": "Food & Dining",
+        "receipt_url": null,
+        "date": "2026-09-03T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:11.000Z",
+        "updated_at": "2026-09-15T15:05:11.000Z"
+      },
+      {
+        "id": "02369985-57d3-4d50-8341-d5312fe17cf7",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "2100.00",
+        "description": "Electricity bill",
+        "category": "Bills & Utilities",
+        "receipt_url": null,
+        "date": "2026-09-03T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:15.000Z",
+        "updated_at": "2026-09-15T15:05:15.000Z"
+      },
+      {
+        "id": "cc930983-9913-4425-84d1-445a88559a4a",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "185.00",
+        "description": "Morning coffee and pastry",
+        "category": "Food & Dining",
+        "receipt_url": null,
+        "date": "2026-09-02T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:11.000Z",
+        "updated_at": "2026-09-15T15:05:11.000Z"
+      },
+      {
+        "id": "14ee1e66-43db-437d-b814-30fa7a9485ff",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "500.00",
+        "description": "Doctor visit co-pay",
+        "category": "Health",
+        "receipt_url": null,
+        "date": "2026-09-02T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:17.000Z",
+        "updated_at": "2026-09-15T15:05:17.000Z"
+      },
+      {
+        "id": "046d2e2d-4fdc-4878-8f1a-f04c7270de27",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "1299.00",
+        "description": "New headphones from Flipkart",
+        "category": "Shopping",
+        "receipt_url": null,
+        "date": "2026-09-02T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:13.000Z",
+        "updated_at": "2026-09-15T15:05:13.000Z"
+      },
+      {
+        "id": "e8cc39d6-4b60-43bb-93de-6a68a7f48151",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "1500.00",
+        "description": "Gym monthly membership",
+        "category": "Health",
+        "receipt_url": null,
+        "date": "2026-09-01T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:17.000Z",
+        "updated_at": "2026-09-15T15:05:17.000Z"
+      },
+      {
+        "id": "65a1199a-2cb8-4051-91c0-847c1370d401",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "320.00",
+        "description": "Lunch at office cafeteria",
+        "category": "Food & Dining",
+        "receipt_url": null,
+        "date": "2026-09-01T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:11.000Z",
+        "updated_at": "2026-09-15T15:05:11.000Z"
+      },
+      {
+        "id": "56ca2b28-e8ee-4b03-978d-ce01ab5f5921",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "499.00",
+        "description": "Netflix subscription",
+        "category": "Entertainment",
+        "receipt_url": null,
+        "date": "2026-09-01T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:14.000Z",
+        "updated_at": "2026-09-15T15:05:14.000Z"
+      },
+      {
+        "id": "1f5c12dc-0d36-44a2-8c06-56f002735abd",
+        "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+        "amount": "120.00",
+        "description": "Auto fare to station",
+        "category": "Transport",
+        "receipt_url": null,
+        "date": "2026-09-01T00:00:00.000Z",
+        "created_at": "2026-09-15T15:05:12.000Z",
+        "updated_at": "2026-09-15T15:05:12.000Z"
+      }
+    ],
+    "total": 22,
+    "page": 1,
+    "limit": 10000,
+    "totalPages": 1
+  },
+  "budgets": [
+    {
+      "id": "c19bbd7d-de83-42d9-bd3c-ae0ca2a803e3",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "category": "Bills & Utilities",
+      "monthly_limit": "6000.00",
+      "month": "2026-09",
+      "created_at": "2026-09-15T15:05:10.000Z",
+      "updated_at": "2026-09-15T15:05:10.000Z"
+    },
+    {
+      "id": "1c529a7c-3734-40ec-ae66-776d3aa974d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "category": "Entertainment",
+      "monthly_limit": "2000.00",
+      "month": "2026-09",
+      "created_at": "2026-09-15T15:05:10.000Z",
+      "updated_at": "2026-09-15T15:05:10.000Z"
+    },
+    {
+      "id": "c0e58d76-1d5c-4890-affb-e1eb521afeff",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "category": "Food & Dining",
+      "monthly_limit": "8000.00",
+      "month": "2026-09",
+      "created_at": "2026-09-15T15:05:08.000Z",
+      "updated_at": "2026-09-15T15:05:08.000Z"
+    },
+    {
+      "id": "20116157-b83c-411a-9750-cd8cea32e769",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "category": "Health",
+      "monthly_limit": "3000.00",
+      "month": "2026-09",
+      "created_at": "2026-09-15T15:05:10.000Z",
+      "updated_at": "2026-09-15T15:05:10.000Z"
+    },
+    {
+      "id": "86cb1397-2bdd-4b31-9bcc-31ca1d0dd910",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "category": "Shopping",
+      "monthly_limit": "5000.00",
+      "month": "2026-09",
+      "created_at": "2026-09-15T15:05:09.000Z",
+      "updated_at": "2026-09-15T15:05:09.000Z"
+    },
+    {
+      "id": "41954fab-f33c-417e-b92a-45e2ac5145d7",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "category": "Transport",
+      "monthly_limit": "3000.00",
+      "month": "2026-09",
+      "created_at": "2026-09-15T15:05:09.000Z",
+      "updated_at": "2026-09-15T15:05:09.000Z"
+    }
+  ],
+  "recurringExpenses": [
+    {
+      "id": "1c42cd56-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "499.00",
+      "description": "Netflix Premium subscription",
+      "category": "Entertainment",
+      "frequency": "monthly",
+      "start_date": "2026-01-01T00:00:00.000Z",
+      "end_date": null,
+      "next_run_date": "2026-10-01T00:00:00.000Z",
+      "last_run_date": "2026-09-01T00:00:00.000Z",
+      "is_active": 1,
+      "notes": "Auto-debited",
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "days_until_next": 15
+    },
+    {
+      "id": "1c42e772-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "1500.00",
+      "description": "Gym Membership - Cult.fit",
+      "category": "Health",
+      "frequency": "monthly",
+      "start_date": "2026-09-01T00:00:00.000Z",
+      "end_date": null,
+      "next_run_date": "2026-10-01T00:00:00.000Z",
+      "last_run_date": "2026-09-01T00:00:00.000Z",
+      "is_active": 1,
+      "notes": null,
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "days_until_next": 15
+    },
+    {
+      "id": "1c42edac-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "850.00",
+      "description": "Airtel Fiber Internet",
+      "category": "Bills & Utilities",
+      "frequency": "monthly",
+      "start_date": "2026-03-01T00:00:00.000Z",
+      "end_date": null,
+      "next_run_date": "2026-10-05T00:00:00.000Z",
+      "last_run_date": "2026-09-05T00:00:00.000Z",
+      "is_active": 1,
+      "notes": "Due 5th every month",
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "days_until_next": 19
+    },
+    {
+      "id": "1c42ef42-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "299.00",
+      "description": "Spotify Family + YouTube Premium",
+      "category": "Entertainment",
+      "frequency": "monthly",
+      "start_date": "2026-06-15T00:00:00.000Z",
+      "end_date": null,
+      "next_run_date": "2026-10-15T00:00:00.000Z",
+      "last_run_date": "2026-09-15T00:00:00.000Z",
+      "is_active": 1,
+      "notes": null,
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "days_until_next": 29
+    }
+  ],
+  "goals": [
+    {
+      "id": "1c1945a6-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "name": "MacBook Air M3",
+      "target_amount": "120000.00",
+      "current_amount": "45000.00",
+      "target_date": "2026-12-31T00:00:00.000Z",
+      "category": "Shopping",
+      "icon": "laptop",
+      "color": "#3b82f6",
+      "auto_allocate_pct": "10.00",
+      "is_completed": 0,
+      "completed_at": null,
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "progress_percentage": 37.5,
+      "remaining_amount": 75000,
+      "days_remaining": 106,
+      "is_overdue": false
+    },
+    {
+      "id": "1c1e4eda-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "name": "Goa Trip with Friends",
+      "target_amount": "50000.00",
+      "current_amount": "18000.00",
+      "target_date": "2026-11-15T00:00:00.000Z",
+      "category": "Travel",
+      "icon": "plane",
+      "color": "#10b981",
+      "auto_allocate_pct": "5.00",
+      "is_completed": 0,
+      "completed_at": null,
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "progress_percentage": 36,
+      "remaining_amount": 32000,
+      "days_remaining": 60,
+      "is_overdue": false
+    },
+    {
+      "id": "1c2367b0-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "name": "Emergency Fund",
+      "target_amount": "100000.00",
+      "current_amount": "75000.00",
+      "target_date": "2027-03-31T00:00:00.000Z",
+      "category": "Savings",
+      "icon": "shield",
+      "color": "#f59e0b",
+      "auto_allocate_pct": "15.00",
+      "is_completed": 0,
+      "completed_at": null,
+      "created_at": "2026-09-16T07:06:16.000Z",
+      "updated_at": "2026-09-16T07:06:16.000Z",
+      "progress_percentage": 75,
+      "remaining_amount": 25000,
+      "days_remaining": 196,
+      "is_overdue": false
+    }
+  ],
+  "goalAllocations": [
+    {
+      "id": "1c3831b5-b19d-11f1-85dc-4ac9f85f02d2",
+      "goal_id": "1c1945a6-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "20000.00",
+      "source": "manual",
+      "allocated_at": "2026-09-16T07:06:16.000Z"
+    },
+    {
+      "id": "1c383c0c-b19d-11f1-85dc-4ac9f85f02d2",
+      "goal_id": "1c1945a6-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "25000.00",
+      "source": "auto_surplus",
+      "allocated_at": "2026-09-16T07:06:16.000Z"
+    },
+    {
+      "id": "1c385ead-b19d-11f1-85dc-4ac9f85f02d2",
+      "goal_id": "1c1e4eda-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "18000.00",
+      "source": "manual",
+      "allocated_at": "2026-09-16T07:06:16.000Z"
+    },
+    {
+      "id": "1c386204-b19d-11f1-85dc-4ac9f85f02d2",
+      "goal_id": "1c2367b0-b19d-11f1-85dc-4ac9f85f02d2",
+      "user_id": "13f47b48-32e8-40e7-a662-3d301b9f5f00",
+      "amount": "75000.00",
+      "source": "manual",
+      "allocated_at": "2026-09-16T07:06:16.000Z"
+    }
+  ]
+}

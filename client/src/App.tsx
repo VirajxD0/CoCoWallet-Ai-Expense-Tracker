@@ -11,6 +11,10 @@ import Dashboard from '@/pages/Dashboard'
 import Expenses from '@/pages/Expenses'
 import Budgets from '@/pages/Budgets'
 import AIAssistant from '@/pages/AIAssistant'
+import RecurringExpenses from '@/pages/recurring/RecurringExpenses'
+import Goals from '@/pages/goals/Goals'
+import Alerts from '@/pages/alerts/Alerts'
+import ExportImport from '@/pages/settings/ExportImport'
 
 const qc = new QueryClient({ defaultOptions:{ queries:{ retry:1, refetchOnWindowFocus:false } } })
 
@@ -26,6 +30,10 @@ function AppRoutes(){
         <Route path="/dashboard" element={<ProtectedRoute><AppShell><Dashboard/></AppShell></ProtectedRoute>} />
         <Route path="/expenses" element={<ProtectedRoute><AppShell><Expenses/></AppShell></ProtectedRoute>} />
         <Route path="/budgets" element={<ProtectedRoute><AppShell><Budgets/></AppShell></ProtectedRoute>} />
+        <Route path="/recurring" element={<ProtectedRoute><AppShell><RecurringExpenses/></AppShell></ProtectedRoute>} />
+        <Route path="/goals" element={<ProtectedRoute><AppShell><Goals/></AppShell></ProtectedRoute>} />
+        <Route path="/alerts" element={<ProtectedRoute><AppShell><Alerts/></AppShell></ProtectedRoute>} />
+        <Route path="/settings/export" element={<ProtectedRoute><AppShell><ExportImport/></AppShell></ProtectedRoute>} />
         <Route path="/ai" element={<ProtectedRoute><AppShell><AIAssistant/></AppShell></ProtectedRoute>} />
         <Route path="*" element={<div className="min-h-screen flex flex-col items-center justify-center p-8 text-center gap-4"><p className="text-2xl font-display font-bold">404 — Not found</p><a href="/" className="text-primary underline font-medium">Go home</a></div>} />
       </Routes>

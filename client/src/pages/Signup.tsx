@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Logo } from '@/components/brand/Logo'
+import { Navbar } from '@/components/marketing/Navbar'
 import logo from '@/assets/icons/CoCoWalletLogo-512.png'
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, ShieldCheck, Check, Gift, Home, Star } from 'lucide-react'
 
@@ -31,7 +32,9 @@ export default function Signup() {
     } catch (e:any) { setError(e.response?.data?.message || e.response?.data?.errors?.[0]?.message || 'Signup failed') }
   }
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
+      <Navbar />
+      <div className="flex-1 flex flex-col lg:flex-row min-h-0">
       {/* LEFT — Panda brand */}
       <div className="hidden lg:flex lg:w-[54%] relative overflow-hidden gradient-navy text-white">
         <div className="absolute inset-0">
@@ -180,18 +183,11 @@ export default function Signup() {
                 <p className="text-center text-sm text-muted-foreground pt-2">Already have account? <Link to="/login" className="text-primary hover:underline font-bold inline-flex items-center gap-1">Sign in <ArrowRight className="h-3.5 w-3.5"/></Link></p>
                 <p className="text-center"><Link to="/" className="text-xs font-medium text-muted-foreground hover:text-foreground inline-flex items-center gap-1">← Back to home</Link></p>
               </form>
-
-              <div className="mt-6 rounded-2xl bg-gold/15 border border-gold/20 p-3 flex gap-3">
-                <div className="h-9 w-9 rounded-xl bg-gold text-gold-foreground flex items-center justify-center shrink-0"><Gift className="h-4 w-4" /></div>
-                <div>
-                  <p className="text-sm font-bold leading-none">Free forever, setup in 30s</p>
-                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">No credit card • Cancel anytime • Your panda guards your coins</p>
-                </div>
-              </div>
             </div>
           </div>
           <p className="text-center text-[11px] text-muted-foreground mt-4 px-4 leading-relaxed">Protected by bank-grade security. Encrypted • Helmet • Rate-limited. 🐼</p>
         </div>
+      </div>
       </div>
     </div>
   )

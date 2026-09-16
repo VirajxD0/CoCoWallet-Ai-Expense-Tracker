@@ -15,7 +15,9 @@ export class ExpensesRepository {
    */
   async findAll(userId: string, query_: ExpenseQueryInput): Promise<ExpenseListResponse> {
     const { page, limit, search, category, startDate, endDate, sortBy, sortOrder } = query_;
-    const offset = (page - 1) * limit;
+    const pageNum = Number(page);
+    const limitNum = Number(limit);
+    const offset = (pageNum - 1) * limitNum;
 
     // Build WHERE clause dynamically
     const conditions: string[] = ['user_id = ?'];
@@ -53,15 +55,15 @@ export class ExpensesRepository {
     // Fetch expenses
     const expenses = await query<Expense>(
       `SELECT * FROM expenses WHERE ${where} ORDER BY ${sortColumn} ${order} LIMIT ? OFFSET ?`,
-      [...params, limit, offset]
+      [...params, limitNum, offset]
     );
 
     return {
       expenses,
       total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
+      page: pageNum,
+      limit: limitNum,
+      totalPages: Math.ceil(total / limitNum),
     };
   }
 
@@ -155,7 +157,7 @@ export class ExpensesRepository {
     const placeholders = values.map(() => '(?, ?, ?, ?, ?, ?, ?)').join(', ');
     const flat = values.flat();
 
-    const [result] = await getPool().execute(
+    const [result] = await getPool().query(
       `INSERT INTO expenses (id, user_id, amount, description, category, date, receipt_url) VALUES ${placeholders}`,
       flat
     ) as any;

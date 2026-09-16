@@ -61,10 +61,10 @@ export function getPool(): mysql.Pool {
 }
 
 /**
- * Execute a query with parameters.
+ * Execute a query with parameters (client-side escaping).
  */
 export async function query<T = any>(sql: string, params?: any[]): Promise<T[]> {
-  const [rows] = await getPool().execute(sql, params);
+  const [rows] = await getPool().query(sql, params);
   return rows as T[];
 }
 
@@ -80,7 +80,7 @@ export async function queryOne<T = any>(sql: string, params?: any[]): Promise<T 
  * Execute an INSERT and return the insert ID.
  */
 export async function insert(sql: string, params?: any[]): Promise<string> {
-  const [result] = await getPool().execute(sql, params) as any;
+  const [result] = await getPool().query(sql, params) as any;
   return result.insertId;
 }
 
@@ -88,14 +88,14 @@ export async function insert(sql: string, params?: any[]): Promise<string> {
  * Execute an INSERT and return the insert ID as UUID.
  */
 export async function insertWithId(sql: string, params?: any[]): Promise<void> {
-  await getPool().execute(sql, params);
+  await getPool().query(sql, params);
 }
 
 /**
  * Execute an UPDATE or DELETE and return affected rows count.
  */
 export async function execute(sql: string, params?: any[]): Promise<number> {
-  const [result] = await getPool().execute(sql, params) as any;
+  const [result] = await getPool().query(sql, params) as any;
   return result.affectedRows;
 }
 

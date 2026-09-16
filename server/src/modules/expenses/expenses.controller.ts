@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { expensesService } from './expenses.service';
+import { alertsService } from '../alerts/alerts.service';
 import { sendSuccess, paginateMeta } from '../../common/utils/apiResponse';
 import { asyncHandler } from '../../common/utils/asyncHandler';
 
@@ -34,6 +35,8 @@ export class ExpensesController {
    */
   create = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const expense = await expensesService.create(req.user!.userId, req.body);
+    // fire-and-forget budget/anomaly alerts so Health-type overspend shows immediately
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, expense, 201);
   });
 
@@ -43,6 +46,7 @@ export class ExpensesController {
   update = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
     const expense = await expensesService.update(id, req.user!.userId, req.body);
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, expense, 200);
   });
 
@@ -52,6 +56,7 @@ export class ExpensesController {
   delete = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const id = req.params.id as string;
     await expensesService.delete(id, req.user!.userId);
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, { message: 'Expense deleted' }, 200);
   });
 
@@ -60,6 +65,7 @@ export class ExpensesController {
    */
   import = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const result = await expensesService.bulkImport(req.user!.userId, req.body.expenses);
+    alertsService.checkAndCreateAlerts(req.user!.userId).catch(() => {});
     sendSuccess(res, result, 201);
   });
 
