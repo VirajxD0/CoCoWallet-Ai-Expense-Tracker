@@ -29,7 +29,7 @@ export class ExportController {
 
     const fs = require('fs');
     const path = require('path');
-    const filePath = path.join('/Users/virajdeshmukh/newProj/server/uploads/exports', job.file_path);
+    const filePath = path.join(process.cwd(), 'uploads/exports', job.file_path);
 
     if (!fs.existsSync(filePath)) {
       res.status(404).json({ status: 'error', code: 'FILE_NOT_FOUND', message: 'Export file not found' });

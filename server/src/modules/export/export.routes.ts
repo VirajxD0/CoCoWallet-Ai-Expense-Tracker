@@ -4,12 +4,17 @@ import { authenticate } from '../../common/middleware/auth';
 import { validate } from '../../common/middleware/validate';
 import multer from 'multer';
 import { exportQuerySchema, importSchema } from './export.schema';
+import { join } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
 const router = Router();
 router.use(authenticate);
 
-const upload = multer({ 
-  dest: '/Users/virajdeshmukh/newProj/server/uploads/temp',
+const TMP_DIR = join(process.cwd(), 'uploads/temp');
+if (!existsSync(TMP_DIR)) mkdirSync(TMP_DIR, { recursive: true });
+
+const upload = multer({
+  dest: TMP_DIR,
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     if (file.mimetype === 'application/json' || file.mimetype === 'text/csv' || 
